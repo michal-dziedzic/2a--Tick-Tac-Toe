@@ -156,6 +156,15 @@ public class Game {
         int OMarkSumRow;
         int XMarkSumDiagonal45degrees=0;
         int OMarkSumDiagonal45degrees=0;
+        int counter=0;
+
+        if(grid[0][2] == 'x' && grid[1][1] == 'x' && grid[2][0] == 'x'){
+            result = "X wins";
+        }
+        if(grid[0][2] == 'o' && grid[1][1] == 'o' && grid[2][0] == 'o'){
+            result = "O wins";
+        }
+
         for (int i = 0; i < 3; i++) {
             XMarkSumColumn = 0;
             XMarkSumRow = 0;
@@ -164,53 +173,48 @@ public class Game {
             if (grid[i][i] == 'x'){
                 XMarkSumDiagonal45degrees++;
                 if (XMarkSumDiagonal45degrees == 3) {
-                    result = "X win diagonal";
+                    result = "X wins";
                 }
             }
             if (grid[i][i] == 'o'){
                 OMarkSumDiagonal45degrees++;
                 if (OMarkSumDiagonal45degrees == 3) {
-                    result = "O win diagonal";
+                    result = "O wins";
                 }
             }
-
             for (int j = 0; j < 3; j++) {
+
+                if (grid[i][j] != '-' && result.equals("None")){
+                    counter++;
+                    if(counter == 9) {
+                        result="Tie";
+                    }
+                }
                 if (grid[i][j] == 'x'){
                     XMarkSumColumn ++;
                     if (XMarkSumColumn  == 3) {
-                    result = "X win column";
+                    result = "X wins";
                     }
                 }
                 if (grid[j][i] == 'x'){
                     XMarkSumRow++;
                     if (XMarkSumRow == 3) {
-                        result = "X win row";
+                        result = "X wins";
                     }
                 }
                 if (grid[i][j] == 'o') {
                     OMarkSumColumn++;
                     if (OMarkSumColumn == 3) {
-                        result = "O win column";
+                        result = "O wins";
                     }
                 }
                 if (grid[j][i] == 'o') {
                     OMarkSumRow++;
                     if (OMarkSumRow == 3) {
-                        result = "O win row";
+                        result = "O wins";
                     }
                 }
             }
-        }
-
-        if(grid[0][2] == 'x' && grid[1][1] == 'x' && grid[2][0] == 'x'){
-            result = "X win diagonal";
-        }
-        if(grid[0][2] == 'o' && grid[1][1] == 'o' && grid[2][0] == 'o'){
-            result = "O win diagonal";
-        }
-
-        if(freeSpots ==0){
-            result="tie";
         }
         return result;
     }
