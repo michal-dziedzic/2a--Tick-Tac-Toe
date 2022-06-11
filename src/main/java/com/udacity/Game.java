@@ -150,7 +150,68 @@ public class Game {
      */
     public String checkGameWinner(char [][]grid){
         String result = "None";
-        //Student code goes here ...
+        int XMarkSumColumn;
+        int XMarkSumRow;
+        int OMarkSumColumn;
+        int OMarkSumRow;
+        int XMarkSumDiagonal45degrees=0;
+        int OMarkSumDiagonal45degrees=0;
+        for (int i = 0; i < 3; i++) {
+            XMarkSumColumn = 0;
+            XMarkSumRow = 0;
+            OMarkSumRow = 0;
+            OMarkSumColumn = 0;
+            if (grid[i][i] == 'x'){
+                XMarkSumDiagonal45degrees++;
+                if (XMarkSumDiagonal45degrees == 3) {
+                    result = "X win diagonal";
+                }
+            }
+            if (grid[i][i] == 'o'){
+                OMarkSumDiagonal45degrees++;
+                if (OMarkSumDiagonal45degrees == 3) {
+                    result = "O win diagonal";
+                }
+            }
+
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j] == 'x'){
+                    XMarkSumColumn ++;
+                    if (XMarkSumColumn  == 3) {
+                    result = "X win column";
+                    }
+                }
+                if (grid[j][i] == 'x'){
+                    XMarkSumRow++;
+                    if (XMarkSumRow == 3) {
+                        result = "X win row";
+                    }
+                }
+                if (grid[i][j] == 'o') {
+                    OMarkSumColumn++;
+                    if (OMarkSumColumn == 3) {
+                        result = "O win column";
+                    }
+                }
+                if (grid[j][i] == 'o') {
+                    OMarkSumRow++;
+                    if (OMarkSumRow == 3) {
+                        result = "O win row";
+                    }
+                }
+            }
+        }
+
+        if(grid[0][2] == 'x' && grid[1][1] == 'x' && grid[2][0] == 'x'){
+            result = "X win diagonal";
+        }
+        if(grid[0][2] == 'o' && grid[1][1] == 'o' && grid[2][0] == 'o'){
+            result = "O win diagonal";
+        }
+
+        if(freeSpots ==0){
+            result="tie";
+        }
         return result;
     }
 
